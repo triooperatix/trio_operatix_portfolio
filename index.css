@@ -1,0 +1,126 @@
+/* ==========================================================================
+   1. Global Resets & Theme Settings
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #080C14;
+  color: #E2E8F0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. Glassmorphism Panel Component
+   ========================================================================== */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 210, 255, 0.3);
+  box-shadow: 0 15px 35px -10px rgba(0, 210, 255, 0.2);
+}
+
+/* ==========================================================================
+   3. Gradient & Color Utility Classes
+   ========================================================================== */
+.gradient-text {
+  background: linear-gradient(135deg, #00D2FF 0%, #FFFFFF 50%, #C08261 100%);
+  color: #00D2FF; /* Fallback for older browsers */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-btn {
+  background: linear-gradient(135deg, #00D2FF 0%, #C08261 100%);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.gradient-btn:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   4. Single-Page App (SPA) Router Animations
+   ========================================================================== */
+.page-section {
+  display: none;
+}
+
+.page-section.active {
+  display: block;
+  animation: pageIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   5. Background & Floating Ambient Animations
+   ========================================================================== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   6. Custom Scrollbar Design
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080C14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00D2FF;
+}
