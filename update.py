@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- Add your favicon here -->
-  <link rel="icon" type="image/x-icon" href="favicon.png" />
-  <!-- Or if using PNG: <link rel="icon" type="image/png" href="favicon.png" /> -->
+import os
+import glob
+import re
 
-  <title>Trio Operatix | Digital • AI • Creative</title>
-</head>
-  <title>Contact Us | Trio Operatix</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="index.css" />
-</head>
-<body class="font-sans antialiased flex flex-col min-h-screen">
-
-  <header class="fixed top-0 left-0 w-full z-50 px-4 py-4">
+replacement = '''  <header class="fixed top-0 left-0 w-full z-50 px-4 py-4">
     <div class="max-w-7xl mx-auto glass-panel rounded-2xl px-6 py-4 flex flex-col transition-all duration-300">
       <div class="flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-3 group shrink-0">
@@ -71,42 +51,15 @@
         <a href="contact.html" class="nav-link text-slate-400 hover:text-cyan-400 transition-colors block">Contact Us</a>
       </nav>
     </div>
-  </header>
+  </header>'''
 
-  <main class="flex-grow pt-32 pb-20 px-6">
-    <section class="max-w-3xl mx-auto">
-      <div class="glass-panel rounded-3xl p-8 md:p-14 text-center border border-cyan-500/20">
-        <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-3xl mx-auto mb-6">
-          <i class="fa-brands fa-whatsapp"></i>
-        </div>
-        
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Connect On WhatsApp</h2>
-        <p class="text-slate-300 mb-8 text-sm md:text-base leading-relaxed">
-          Reach out directly on WhatsApp to connect with our core team regarding product strategy, engineering, and launches.
-        </p>
-
-        <a href="https://wa.me/923260420276" target="_blank" class="inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-black font-extrabold px-8 py-4 rounded-2xl text-base transition-all shadow-lg shadow-emerald-500/20 w-full sm:w-auto">
-          <i class="fa-brands fa-whatsapp text-2xl"></i> Start Chat
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="glass-panel mt-auto border-x-0 border-b-0 py-10 px-6">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      <div>
-        <div class="font-extrabold text-lg text-white">TRIO <span class="text-cyan-400">OPERATIX</span></div>
-        <p class="text-xs text-slate-400 mt-1">Digital • AI • Creative Capabilities</p>
-      </div>
-      <div class="flex flex-wrap justify-center items-center gap-6 text-sm">
-        <a href="https://www.instagram.com/trio_operatix?stkn=Zm5rbTljZGJ3MjAx&utm_source=qr" target="_blank" class="text-slate-400 hover:text-cyan-400 flex items-center gap-2"><i class="fa-brands fa-instagram"></i> Instagram</a>
-        <a href="mailto:triooperatix@gmail.com" class="text-slate-400 hover:text-cyan-400 flex items-center gap-2"><i class="fa-solid fa-envelope"></i> triooperatix@gmail.com</a>
-        <a href="https://wa.me/923260420276" target="_blank" class="text-slate-400 hover:text-emerald-400 flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-      </div>
-      <p class="text-xs text-slate-500">© 2026 Trio Operatix.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+for f in glob.glob("*.html"):
+    with open(f, 'r', encoding='utf-8') as file:
+        content = file.read()
+    
+    # replace everything between <header> and </header>
+    new_content = re.sub(r'  <header class="fixed top-0 left-0 w-full z-50 px-4 py-4">.*?</header>', replacement, content, flags=re.DOTALL)
+    
+    with open(f, 'w', encoding='utf-8') as file:
+        file.write(new_content)
+        print(f"Updated {f}")
